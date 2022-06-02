@@ -16,8 +16,6 @@ import com.google.gson.Gson;
 public class InventoryReport implements Runnable {
 
 	private Random rand = new Random();
-	private final int PARSECHANGE = 5;
-
 	private Socket clientSocket = null;
 	private PrintWriter writer = null;
 	private BufferedReader bufferReader = null;
@@ -29,6 +27,7 @@ public class InventoryReport implements Runnable {
 	private final static String SERVER_NAME = "localhost";
 	private final static int SERVER_PORT = 8060;
 	private static final int OPTION = 2;
+	private static final int MAX_READING = 80;
 	public static Gson gson = new Gson();
 
 
@@ -37,9 +36,7 @@ public class InventoryReport implements Runnable {
 		this.latch = latch;
 	}
 	
-	public InventoryReport() {
-		
-	}
+	public InventoryReport() {}
 
 	@Override
 	public void run() {
@@ -53,7 +50,6 @@ public class InventoryReport implements Runnable {
 
 			// sending data
 			String jsonIOTThing = gson.toJson(iotThing);
-			System.out.println("jsonExpense "+ jsonIOTThing );
 			writer = new PrintWriter(clientSocket.getOutputStream(), true);
 			writer.println(jsonIOTThing);
 
@@ -62,14 +58,13 @@ public class InventoryReport implements Runnable {
 
 			// reading data
 			String line = bufferReader.readLine();
-
 			System.out.println("server says: " + line );
+			
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -100,7 +95,8 @@ public class InventoryReport implements Runnable {
 	private Device createDevice() {
 		Type[] types = Type.values();
 		int rundInt = rand.nextInt(0,types.length);
-		return new Device(UUID.randomUUID(), types[rundInt], models[rundInt], manufacturers[rundInt], rundInt);
+		int rundReading = rand.nextInt(0,MAX_READING);
+		return new Device(UUID.randomUUID(), types[rundInt], models[rundInt], manufacturers[rundInt], rundReading);
 	}
 
 

@@ -31,7 +31,6 @@ public class IOTThingResoures {
 	public Response getIotThingById(@PathParam("id") UUID id) {
 		
 		IOTThing iotThing =  dbService.getIotThingById(id);
-		System.out.println(iotThing);
 		return Response.ok().entity(iotThing).build();
 	}
 	
@@ -41,9 +40,8 @@ public class IOTThingResoures {
 			return Response.ok().entity(dbService.getAllIOTThing()).build();
 		
 		Type type = Utility.convertStringToType(filterBean.getType());
-			
 		List<IOTThing> iotThings = dbService.getIotThingByTypemodelmanufacturer(type, filterBean.getManufacturer(), filterBean.getModel());
-		System.out.println(iotThings);
+
 		return Response.ok().entity(iotThings).build();
 	}
 	

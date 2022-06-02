@@ -8,7 +8,6 @@ import java.util.UUID;
 
 import ajbc.webservice.rest.Client.Device;
 import ajbc.webservice.rest.Client.IOTThing;
-import ajbc.webservice.rest.Client.InventoryReport;
 import ajbc.webservice.rest.Client.Type;
 
 public class DBMock {
@@ -37,8 +36,8 @@ public class DBMock {
 		
 		devices.add(new Device(uuid2, Type.CONTROLLER, "web", "manufa", 1.7));
 		devices.add(new Device(UUID.randomUUID(), Type.ACTUATOR, "sen", "actuar", 1.8));
-//		devices.add(new Device(UUID.randomUUID(), Type.SENSOR, "act", "manufa", 80));
-//		devices.add(new Device(UUID.randomUUID(), Type.CONTROLLER, "cont", "manufa", 13.7));
+		devices.add(new Device(UUID.randomUUID(), Type.SENSOR, "act", "manufa", 80));
+		devices.add(new Device(UUID.randomUUID(), Type.CONTROLLER, "cont", "manufa", 13.7));
 		UUID uuid = UUID.nameUUIDFromBytes("testname".getBytes());
 		IOTThing iotThing = new IOTThing(uuid, Type.ACTUATOR, "model", "manufactor", devices);
 		
@@ -47,10 +46,7 @@ public class DBMock {
 		for (Device device : devices) {
 			deviceMap.put(UUID.fromString(iotThing.getId()), device);
 		}
-		
-		
 	}
-	
 	
 	public Map<UUID, IOTThing> getIotThingsMap() {
 		return iotThingsMap;

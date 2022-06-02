@@ -1,9 +1,6 @@
 package ajbc.webservice.rest.Client;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
-
 import java.util.UUID;
 
 import org.junit.Test;
@@ -28,7 +25,7 @@ public class DeviceTest {
 		assertEquals(device.getType(), type);
 		assertEquals(device.getModel(), model);
 		assertEquals(device.getManufacturer(), manufacturer);
-//		assertEquals(device.getReading(), reading);
+		assertEquals(device.getReading(), reading ,reading);
 	}
 
 

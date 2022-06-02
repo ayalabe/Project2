@@ -51,18 +51,6 @@ public class DBService {
 		
 	}
 
-	public static void printDB() {
-		System.out.println("iotThingsMap");
-		for (UUID key: iotThingsMap.keySet()){  
-			System.out.println(key+ " = " + iotThingsMap.get(key));
-		} 
-		
-		System.out.println("deviceMap");
-		for (UUID key: deviceMap.keySet()){  
-			System.out.println(key+ " = " + deviceMap.get(key));
-		} 
-	}
-
 	public IOTThing getIotThingById(UUID id) {
 		IOTThing iotThing = iotThingsMap.get(id);
 		if(iotThing == null)
